@@ -107,7 +107,7 @@ if (count($partes) >= 2) {
 
         <div class="text-center mt-5">
             <a href="../logout.php" class="btn btn-danger btn-lg px-4 shadow-sm">
-                <i class="fa-solid fa-right-from-bracket me-2"></i>Cerrar sesión
+                <i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar sesión 
             </a>
         </div>
 
