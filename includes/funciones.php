@@ -531,7 +531,7 @@ function obtenerHorasAsistenciasPorMes(PDO $pdo, string $filtro_doc, string $fil
     $stmt = $pdo->prepare($sql);
     $stmt->execute($filtros['params']);
     $filas      = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $totalHoras = array_sum(array_column($filas, 'total_horas'));
+    $totalHoras = array_sum(array_column($filas, ' total_horas'));
 
     return ['filas' => $filas, 'total_horas' => $totalHoras];
 }

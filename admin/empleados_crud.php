@@ -538,7 +538,7 @@ if (isset($_SESSION['nombre_completo'])) {
                             <input type="password" name="password" required minlength="10" maxlength="10" pattern="[A-Za-z0-9]{10}" class="form-control">
                         </div>
                         <button type="submit" name="crear_admin" class="btn btn-primary">Registrar Administrador</button>
-                        <a href="?accion=menu" class="btn btn-secondary">Cancelar</a>
+                        <a href="?accion=menu" class="btn btn-secondary"> Cancelar</a>
                     </form>
                 </div>
             </div>
@@ -559,7 +559,7 @@ if (isset($_SESSION['nombre_completo'])) {
         pinInput.required = on;
         if (!on) pinInput.value = '';
     });
-})();
+} )();
 </script>
 </body>
 </html>

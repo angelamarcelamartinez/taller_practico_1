@@ -396,7 +396,7 @@ function urlReporte(array $params): string
             <div class="card-header bg-white fw-semibold">Desglose mensual — <?= $anio ?></div>
             <div class="card-body p-0">
                 <?php if (count($porMes) === 0): ?>
-                    <p class="text-muted p-4 mb-0">No hay asistencias registradas en este año.</p>
+                    <p class="text-muted p-4 mb-0"> No hay asistencias registradas en este año.</p>
                 <?php else: ?>
                     <div class="table-responsive">
                         <table class="table table-hover mb-0 align-middle">
