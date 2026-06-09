@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 class Database
 {
     private $hostname = "localhost";
-    private $database = "ejer1";
+    private $database = "taller";
     private $username = "root";
     private $password = "";
     private $charset = "utf8mb4"; 
