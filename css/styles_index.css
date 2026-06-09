@@ -1,0 +1,172 @@
+/* ============================================================
+   CSS PARA INDEX PRINCIPAL
+   ============================================================ */
+
+/* ── Variables ──────────────────────────────────────────────── */
+:root {                                        /* Selector raíz del documento, aplica a todo */
+    --primary:      #4f46e5;                   /* Color primario: índigo vibrante */
+    --primary-dark: #3730a3;                   /* Variante oscura del primario para hovers */
+    --surface:      #ffffff;                   /* Color de superficie/fondo de tarjetas */
+    --muted:        #6b7280;                   /* Gris medio para textos secundarios */
+    --radius:       1rem;                      /* Radio de borde estándar (16px) reutilizable */
+}
+
+/* ── Hero del empleado ──────────────────────────────────────── */
+.hero-emp {                                    /* Sección principal tipo banner superior */
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); /* Degradado diagonal de índigo claro a oscuro */
+    color: #fff;                               /* Texto blanco sobre el fondo oscuro */
+    padding: 120px 0 60px;                     /* Espacio generoso arriba (120px) para la navbar, 60px abajo */
+    text-align: center;                        /* Centra todo el contenido del hero */
+}
+
+/* ── Tarjeta flotante del formulario ────────────────────────── */
+.form-card {                                   /* Contenedor del formulario principal */
+    background: var(--surface);                /* Fondo blanco */
+    border-radius: var(--radius);              /* Esquinas redondeadas (16px) */
+    box-shadow: 0 10px 40px rgba(79, 70, 229, .15); /* Sombra suave con tinte morado */
+    padding: 2.5rem;                           /* Relleno interno de 40px en todos los lados */
+    max-width: 460px;                          /* Ancho máximo para no estirarse en pantallas grandes */
+    margin: -40px auto 60px;                   /* Margen negativo arriba para que "flote" sobre el hero */
+    position: relative;                        /* Necesario para que z-index funcione */
+    z-index: 10;                               /* Se superpone sobre el hero gracias al margen negativo */
+}
+
+/* Inputs dentro de la tarjeta */
+.form-card .form-label {                       /* Etiquetas de los campos dentro de la tarjeta */
+    font-weight: 600;                          /* Texto semi-negrita para mayor legibilidad */
+    color: #374151;                            /* Gris oscuro, más suave que el negro puro */
+}
+
+.form-card .form-control {                     /* Campos de entrada dentro de la tarjeta */
+    border-radius: .6rem;                      /* Esquinas ligeramente redondeadas (9.6px) */
+    padding: .65rem 1rem;                      /* Relleno cómodo: 10.4px arriba/abajo, 16px lados */
+    font-size: 1rem;                           /* Tamaño de texto base del navegador (usualmente 16px) */
+    border: 1.5px solid #e5e7eb;              /* Borde sutil en gris claro */
+    transition: border-color .2s, box-shadow .2s; /* Animación suave al enfocar el campo */
+}
+
+.form-card .form-control:focus {               /* Estado cuando el usuario hace clic en el input */
+    border-color: var(--primary);              /* El borde cambia al color primario al enfocar */
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, .15); /* Resplandor exterior sutil (tipo "outline" suave) */
+}
+
+/* Botón principal del formulario */
+.btn-registrar {                               /* Botón de acción principal del formulario */
+    background: var(--primary);                /* Fondo con el color primario */
+    color: #fff;                               /* Texto blanco */
+    border: none;                              /* Sin borde nativo del botón */
+    border-radius: .6rem;                      /* Esquinas redondeadas iguales a los inputs */
+    padding: .75rem 1.5rem;                    /* Relleno: 12px arriba/abajo, 24px lados */
+    font-weight: 600;                          /* Texto semi-negrita */
+    letter-spacing: .03em;                     /* Ligero espaciado entre letras para legibilidad */
+    transition: background .2s, transform .1s; /* Animación suave en hover */
+    width: 100%;                               /* Ocupa todo el ancho de la tarjeta */
+    cursor: pointer;                           /* Cursor de mano al pasar sobre el botón */
+}
+
+.btn-registrar:hover {                         /* Estado al pasar el cursor sobre el botón */
+    background: var(--primary-dark);           /* Oscurece el fondo en hover */
+    transform: translateY(-1px);              /* Sube 1px para efecto de "elevación" */
+}
+
+/* ── Icono decorativo de la tarjeta ─────────────────────────── */
+.icon-stamp {                                  /* Caja cuadrada con icono decorativo en la tarjeta */
+    width: 64px;                               /* Ancho fijo de 64px */
+    height: 64px;                              /* Alto igual al ancho: cuadrado perfecto */
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark)); /* Mismo degradado que el hero */
+    border-radius: 1rem;                       /* Esquinas redondeadas tipo "squircle" */
+    display: flex;                             /* Flexbox para centrar el icono */
+    align-items: center;                       /* Centra verticalmente el icono */
+    justify-content: center;                   /* Centra horizontalmente el icono */
+    margin: 0 auto 1.25rem;                    /* Centrado horizontal + 20px de espacio debajo */
+    font-size: 1.6rem;                         /* Tamaño del icono (FontAwesome) */
+    color: #fff;                               /* Icono en blanco */
+    box-shadow: 0 4px 16px rgba(79, 70, 229, .35); /* Sombra con tinte morado más pronunciada */
+}
+
+/* ── Separador decorativo (igual al del catálogo) ───────────── */
+.section-line {                                /* Primera definición: línea decorativa bajo títulos */
+    display: block;                            /* Ocupa su propio renglón */
+    width: 60px;                               /* Ancho fijo pequeño, decorativo */
+    height: 3px;                               /* Muy delgada, solo una línea */
+    background: var(--primary);                /* Color primario */
+    border-radius: 2px;                        /* Extremos ligeramente redondeados */
+    margin: .5rem auto 0;                      /* 8px arriba, centrado, sin margen abajo */
+}
+
+/* ── Tarjetas informativas inferiores ───────────────────────── */
+.info-card {                                   /* Tarjetas de información secundaria */
+    border-radius: var(--radius);              /* Esquinas redondeadas estándar (16px) */
+    border: 1.5px solid #e5e7eb;              /* Borde sutil en gris claro */
+    padding: 1.5rem;                           /* Relleno interno de 24px */
+    text-align: center;                        /* Contenido centrado */
+    transition: box-shadow .2s;                /* Animación suave en hover */
+    background: var(--surface);                /* Fondo blanco */
+}
+
+.info-card:hover {                             /* Estado hover de las tarjetas informativas */
+    box-shadow: 0 6px 20px rgba(79, 70, 229, .12); /* Sombra morada suave al pasar el cursor */
+}
+
+.info-card .icon-wrap {                        /* Contenedor del icono dentro de cada info-card */
+    width: 50px;                               /* Ancho fijo ligeramente menor que .icon-stamp */
+    height: 50px;                              /* Alto igual: cuadrado */
+    background: rgba(150, 150, 150, 0.1);     /* Fondo gris muy translúcido */
+    border-radius: .75rem;                     /* Esquinas redondeadas (12px) */
+    display: flex;                             /* Flexbox para centrar */
+    align-items: center;                       /* Centra verticalmente */
+    justify-content: center;                   /* Centra horizontalmente */
+    margin: 0 auto .75rem;                     /* Centrado + 12px de espacio debajo */
+    font-size: 1.2rem;                         /* Tamaño del icono */
+    color: var(--primary);                     /* Icono en color primario (no blanco, contrasta con fondo claro) */
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.footer {                                      /* Barra de pie de página */
+    background: #1e1b4b;                       /* Azul muy oscuro, casi negro morado */
+    color: rgba(255, 255, 255, .8);            /* Texto blanco con 80% de opacidad (suavizado) */
+    padding: 1.5rem 0;                         /* 24px arriba y abajo, sin relleno lateral */
+}
+
+/* ─── SECCIÓN EMPRESA ─── */
+.empresa-info {                                /* Sección con información de la empresa */
+    background: #f8f9fa;                       /* Gris muy claro, casi blanco */
+    border-top: 1px solid #e9ecef;            /* Línea divisora sutil en la parte superior */
+}
+
+/* Línea decorativa */
+.section-line {                                /* Segunda definición: sobreescribe la primera */
+    width: 80px;                               /* Un poco más ancha que la versión anterior (60px → 80px) */
+    height: 4px;                               /* Ligeramente más gruesa (3px → 4px) */
+    background: linear-gradient(90deg, #0d6efd, #6610f2); /* Degradado horizontal azul Bootstrap → morado */
+    margin: 0 auto;                            /* Solo centrado, sin margen vertical */
+    border-radius: 10px;                       /* Extremos bien redondeados */
+}
+
+/* Imagen empresa */
+.empresa-img-wrapper {                         /* Contenedor que envuelve la imagen de la empresa */
+    padding: 10px;                             /* Pequeño relleno alrededor de la imagen */
+}
+
+.empresa-img {                                 /* La imagen de la empresa en sí */
+    max-width: 100%;                           /* Responsive: nunca más ancha que su contenedor */
+    border-radius: 15px;                       /* Esquinas redondeadas */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* Sombra pronunciada para efecto de profundidad */
+    transition: transform 0.3s ease;           /* Animación suave para el efecto hover */
+}
+
+.empresa-img:hover {                           /* Estado hover de la imagen */
+    transform: scale(1.03);                    /* Crece un 3% al pasar el cursor */
+}
+
+.navbar {                                      /* Barra de navegación */
+    transition: all 0.3s ease;                 /* Transición suave para todos sus cambios */
+    background: transparent;                   /* Fondo transparente por defecto (sobre el hero) */
+}
+
+/* Estado cuando se hace scroll */
+.navbar.scrolled {                             /* Clase añadida por JS cuando el usuario hace scroll */
+    background: rgba(30, 27, 75, 0.379);      /* Fondo semi-transparente en el mismo azul oscuro del footer */
+    backdrop-filter: blur(10px);               /* Efecto "vidrio esmerilado": desenfoca lo que hay detrás */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15); /* Sombra inferior para separar del contenido */
+}
