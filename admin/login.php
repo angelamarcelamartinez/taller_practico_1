@@ -8,28 +8,9 @@ header("Cache-control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
 $error = '';
-$logout_ok = false;
+$logout_ok = isset($_GET['logout']);
 
-// Cerrar sesión de administrador (?logout=1 desde dashboard o logout.php)
-if (isset($_GET['logout'])) {
-    $_SESSION = [];
-    if (ini_get('session.use_cookies')) {
-        $params = session_get_cookie_params();
-        setcookie(
-            session_name(),
-            '',
-            time() - 42000,
-            $params['path'],
-            $params['domain'],
-            $params['secure'],
-            $params['httponly']
-        );
-    }
-    session_destroy();
-    session_start();
-    $logout_ok = true;
-} elseif (isset($_SESSION['admin_id'])) {
-    // Si ya tiene sesión de administrador, va directo al dashboard
+if (isset($_SESSION['admin_id'])) {
     header('Location: dashboard.php');
     exit;
 }
