@@ -46,6 +46,7 @@ if (count($partes) >= 2) {
             justify-content: center;
         }
     </style>
+    <link rel="stylesheet" href="../css/styles_index.css">
 </head>
 
 <body>
@@ -114,4 +115,10 @@ if (count($partes) >= 2) {
     </div>
 
 </body>
+<footer>
+    <?php 
+    // Cargar el footer reutilizable
+    require_once __DIR__ . '/../includes/footer.php'; 
+    ?>
+</footer>
 </html>

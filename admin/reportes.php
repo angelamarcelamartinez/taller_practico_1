@@ -90,6 +90,7 @@ function urlReporte(array $params): string
     <style>
         body { background: #f5f7fb; }
     </style>
+    <link rel="stylesheet" href="../css/styles_index.css">
 </head>
 <body>
 <div class="container py-4">
@@ -430,4 +431,11 @@ function urlReporte(array $params): string
     <?php endif; ?>
 </div>
 </body>
+<footer>
+    <?php 
+    // Cargar el footer reutilizable
+    require_once __DIR__ . '/../includes/footer.php'; 
+    ?>
+</footer>
+
 </html>
