@@ -28,13 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id_tipo_empleado = obtenerIdTipoEmpleado($pdo);
 
         if ($documento <= 0 || $pin === '' || $password_plain === '' || $nombre_completo === '') {
-            $mensaje = '❌ El documento, PIN, contraseña y nombre completo son obligatorios.';
+            $mensaje = ' El documento, PIN, contraseña y nombre completo son obligatorios.';
         } elseif ($id_tipo_empleado === null) {
-            $mensaje = '❌ No existe el tipo de usuario Empleado en la base de datos.';
+            $mensaje = 'No existe el tipo de usuario Empleado en la base de datos.';
         } elseif (!preg_match('/^\d{4}$/', $pin)) {
-            $mensaje = '❌ El PIN debe tener exactamente 4 dígitos.';
+            $mensaje = ' El PIN debe tener exactamente 4 dígitos.';
         } elseif (!preg_match('/^[A-Za-z0-9]{10}$/', $password_plain)) {
-            $mensaje = '❌ La contraseña debe tener 10 caracteres alfanuméricos.';
+            $mensaje = ' La contraseña debe tener 10 caracteres alfanuméricos.';
         } else {
             $ok = insertarUsuario(
                 $pdo,
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $id_tipo_empleado,
                 $estado
             );
-            $mensaje = $ok ? "✅ Usuario creado con éxito. Documento: $documento" : '❌ Error al insertar el usuario';
+            $mensaje = $ok ? "✅ Usuario creado con éxito. Documento: $documento" : ' Error al insertar el usuario';
         }
     }
 
@@ -60,23 +60,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $estado           = trim($_POST['estado'] ?? 'activo');
 
         if ($documento <= 0 || $nombre_completo === '') {
-            $mensaje = '❌ Datos inválidos. Verifique los campos obligatorios.';
+            $mensaje = ' Datos inválidos. Verifique los campos obligatorios.';
         } else {
             $pin_actualizar = null;
             if (!empty($_POST['cambiar_pin'])) {
                 if (!preg_match('/^\d{4}$/', $pin)) {
-                    $mensaje = '❌ El nuevo PIN debe tener exactamente 4 dígitos.';
+                    $mensaje = ' El nuevo PIN debe tener exactamente 4 dígitos.';
                 } else {
                     $pin_actualizar = ($pin);
                 }
             }
             if ($mensaje === '' && $password_plain !== '' && !preg_match('/^[A-Za-z0-9]{10}$/', $password_plain)) {
-                $mensaje = '❌ La contraseña debe tener 10 caracteres alfanuméricos.';
+                $mensaje = ' La contraseña debe tener 10 caracteres alfanuméricos.';
             }
             if ($mensaje === '') {
                 $password_hash = ($password_plain !== '') ? password_hash($password_plain, PASSWORD_DEFAULT) : null;
                 $ok = actualizarUsuario($pdo, $documento, $pin_actualizar, $nombre_completo, $id_area, $id_tipo_usuario, $estado, $password_hash);
-                $mensaje = $ok ? '✅ Usuario actualizado correctamente' : '❌ No se realizaron cambios o el usuario no existe';
+                $mensaje = $ok ? ' Usuario actualizado correctamente' : ' No se realizaron cambios o el usuario no existe';
             }
         }
     }
@@ -85,9 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $documento = isset($_POST['documento']) && $_POST['documento'] !== '' ? (int) $_POST['documento'] : 0;
         if ($documento > 0) {
             $ok = eliminarUsuario($pdo, $documento);
-            $mensaje = $ok ? '✅ Usuario eliminado correctamente' : '❌ No se encontró el documento del usuario';
+            $mensaje = $ok ? ' Usuario eliminado correctamente' : ' No se encontró el documento del usuario';
         } else {
-            $mensaje = '❌ El documento proporcionado es inválido';
+            $mensaje = ' El documento proporcionado es inválido';
         }
     }
 
@@ -99,18 +99,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id_tipo_admin   = obtenerIdTipoAdministrador($pdo);
 
         if ($documento <= 0 || $pin === '' || $password_plain === '' || $nombre_completo === '') {
-            $mensaje = '❌ Todos los campos son obligatorios.';
+            $mensaje = ' Todos los campos son obligatorios.';
         } elseif ($id_tipo_admin === null) {
-            $mensaje = '❌ No existe el tipo Administrador en la base de datos.';
+            $mensaje = 'No existe el tipo Administrador en la base de datos.';
         } elseif (!preg_match('/^\d{4}$/', $pin)) {
-            $mensaje = '❌ El PIN debe tener 4 dígitos.';
+            $mensaje = ' El PIN debe tener 4 dígitos.';
         } elseif (!preg_match('/^[A-Za-z0-9]{10}$/', $password_plain)) {
-            $mensaje = '❌ La contraseña debe tener 10 caracteres alfanuméricos.';
+            $mensaje = ' La contraseña debe tener 10 caracteres alfanuméricos.';
         } elseif (obtenerUsuarioPorDocumento($pdo, $documento)) {
-            $mensaje = '❌ Ya existe un usuario con ese documento.';
+            $mensaje = ' Ya existe un usuario con ese documento.';
         } else {
             $ok = insertarUsuario($pdo, $documento, ($pin), password_hash($password_plain, PASSWORD_DEFAULT), $nombre_completo, null, $id_tipo_admin, 'activo');
-            $mensaje = $ok ? "✅ Administrador creado. Documento: $documento" : '❌ Error al crear administrador';
+            $mensaje = $ok ? " Administrador creado. Documento: $documento" : ' Error al crear administrador';
         }
     }
 
@@ -118,20 +118,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nombre_tipo = trim($_POST['nombre_tipo'] ?? '');
         if ($nombre_tipo !== '') {
             $res = crearTipoUsuario($pdo, $nombre_tipo);
-            $mensaje = $res ? '✅ Tipo de usuario creado correctamente' : '❌ Error al crear tipo de usuario';
+            $mensaje = $res ? 'Tipo de usuario creado correctamente' : ' Error al crear tipo de usuario';
         }
     } elseif (isset($_POST['actualizar_tipo'])) {
         $id_tipo     = (int) ($_POST['id_tipo'] ?? 0);
         $nombre_tipo = trim($_POST['nombre_tipo'] ?? '');
         if ($id_tipo > 0 && $nombre_tipo !== '') {
             $res = actualizarTipoUsuario($pdo, $id_tipo, $nombre_tipo);
-            $mensaje = $res ? '✅ Tipo de usuario actualizado' : '❌ Error al actualizar';
+            $mensaje = $res ? ' Tipo de usuario actualizado' : 'Error al actualizar';
         }
     } elseif (isset($_POST['eliminar_tipo'])) {
         $id_tipo = (int) ($_POST['id_tipo'] ?? 0);
         if ($id_tipo > 0) {
             $res = eliminarTipoUsuario($pdo, $id_tipo);
-            $mensaje = $res ? '✅ Tipo de usuario eliminado' : '❌ Error al eliminar';
+            $mensaje = $res ? ' Tipo de usuario eliminado' : ' Error al eliminar';
         }
     }
 
@@ -139,20 +139,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nombre_area = trim($_POST['nombre_area'] ?? '');
         if ($nombre_area !== '') {
             $res = crearArea($pdo, $nombre_area);
-            $mensaje = $res ? '✅ Área creada correctamente' : '❌ Error al crear el área';
+            $mensaje = $res ? 'Área creada correctamente' : ' Error al crear el área';
         }
     } elseif (isset($_POST['actualizar_area'])) {
         $id_area     = (int) ($_POST['id_area'] ?? 0);
         $nombre_area = trim($_POST['nombre_area'] ?? '');
         if ($id_area > 0 && $nombre_area !== '') {
             $res = actualizarArea($pdo, $id_area, $nombre_area);
-            $mensaje = $res ? '✅ Área actualizada' : '❌ Error al actualizar';
+            $mensaje = $res ? ' Área actualizada' : 'Error al actualizar';
         }
     } elseif (isset($_POST['eliminar_area'])) {
         $id_area = (int) ($_POST['id_area'] ?? 0);
         if ($id_area > 0) {
             $res = eliminarArea($pdo, $id_area);
-            $mensaje = $res ? '✅ Área eliminada' : '❌ Error al eliminar (puede tener usuarios asignados)';
+            $mensaje = $res ? ' Área eliminada' : ' Error al eliminar (puede tener usuarios asignados)';
         }
     }
 }

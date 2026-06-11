@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } else {
 
-        // 🔎 1. Buscar usuario en nueva tabla
+        // Buscar usuario en nueva tabla
         $stmt = $pdo->prepare("
             SELECT 
                 u.documento,
@@ -44,12 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([':documento' => $documento]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // ❌ Usuario no existe o inactivo
-        if (!$usuario || $usuario['estado'] != 1) {
+        // Usuario no existe o inactivo
+        if (!$usuario || $usuario['estado'] != "activo") {
             $mensaje = "Credenciales inválidas o usuario inactivo.";
             $tipoMensaje = "danger";
 
-        // ❌ PIN incorrecto
+        // PIN incorrecto
         } elseif (trim($pin) !== trim($usuario['pin'])) {
             $mensaje = "Credenciales inválidas.";
             $tipoMensaje = "danger";
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $nombre = htmlspecialchars($usuario['nombre_completo']);
 
-            // 🔎 2. Buscar asistencia abierta HOY
+            // Buscar asistencia abierta HOY
             $stmtReg = $pdo->prepare("
                 SELECT id_asistencia, fecha_hora_entrada
                 FROM asistencias
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmtReg->execute([':doc' => $documento]);
             $registro = $stmtReg->fetch(PDO::FETCH_ASSOC);
 
-            // 🟢 ENTRADA
+            // ENTRADA
             if (!$registro) {
 
                 $ins = $pdo->prepare("
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mensaje = "¡Bienvenido $nombre! Entrada registrada.";
                 $tipoMensaje = "success";
 
-            // 🔴 SALIDA
+            // SALIDA
             } else {
 
                 $upd = $pdo->prepare("
